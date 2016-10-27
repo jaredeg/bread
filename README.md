@@ -3,6 +3,8 @@ bread api implementation in shopping cart.  Will need to have mongoose installed
 
 Currently bread API is taking in static data of $100 Amazon Echo.  To Do Make cart dynamic enough that the API gets the json data from the Cart and adds it to the bread implementation.
 
+Note: All bread front-end code is in public/javascripts/breadout.js 
+
 To demo:
 
 Sign-up as a new user (shopping cart requires login)

@@ -1,0 +1,152 @@
+<!DOCTYPE html>  
+   <html>
+  <head>
+    <meta charset="utf-8">
+    <title>!DOCTYPE html - HTML5 doctype declaration - HTML5 tutorial</title>
+    <meta name="description" content="!DOCTYPE html - the doctype declaration tells the browser that this page is written in HTML5">
+   <style>
+   html, body, #bread-button {
+  height: 100%;
+  margin: 0;
+  width: 100%;
+}
+
+body {
+  display: table;
+}
+
+#bread-button {
+  /* Style your base button here */
+  background: #333;
+  color: #FFF;
+  display: table-cell;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bread-btn {
+  cursor: pointer;
+}
+
+.bread-embed-inner, .bread-label .bread-embed-icon {
+  display: inline-block;
+}
+
+.bread-label .bread-embed-icon:after {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  color: #333;
+  content: 'i';
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-left: 8px;
+  padding: 4px 9px;
+}
+
+.bread-pot:before {
+  content: 'Pay Over Time';
+}
+
+.bread-btn .bread-as-low-as:before,
+.bread-label .bread-as-low-as:before {
+  content: 'As low as ';
+}
+
+.bread-for:before {
+  content: 'For ';
+}
+</style>
+</head>
+      <body>
+        <!-- Example existing Checkout HTML -->
+        <p>Checkout below:</p>
+
+        <!-- Include our button within a form for seamless integration -->
+        <form id="checkout-form" action="checkout" method="post">
+          <!-- Note that you must pass a div element -->
+          <div id='bread-checkout-btn'></div>
+        </form>
+
+        <!-- Load the bread.js script (this can be here or usually in the head) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://checkout-sandbox.getbread.com/bread.js" 
+            data-api-key="7101ea30-8ae3-47ab-a8bd-235860d36f3e"></script>
+
+        <!-- Create the `opts` object -->
+        <script type='text/javascript'>
+          var cart = {name: "Amazon Echo",
+              price: 100*100,
+              sku: '1001604944',
+              imageUrl: 'http://www.homedepot.com/catalog/productImages/1000/b0/b0cfb2dc-ecf2-44d7-8c24-39b405098944_1000.jpg',
+              detailUrl: 'http://www.homedepot.com/p/Amazon-Echo-53003785HD/206588431',
+              quantity: 1
+          };
+
+
+          var list = [cart];
+          
+
+          // If you have their shipping address already, you can pass it to us
+          // so they don't have to fill it out again.
+          var shippingContact = {
+            fullName: 'Jane Doe',
+            address:  '123 Test St.',
+            address2: '#8',
+            zip:      '11238',
+            phone:    '2234449812',
+            city:     'Coolstown',
+            state:    'NY'
+          };
+
+          // Likewise, if you have the billing contact, you can pass it in to us
+          // so they don't have to.
+          var billingContact = {
+            fullName: 'Jane Doe',
+            address:    '123 Test St.',
+            address2:   'Apt. 4',
+            zip:        '11238',
+            city:       'New York',
+            state:      'NY', 
+            phone:     '1234449812',
+            email:      'jane.doe@geocities.com'
+          };
+
+          var taxCheck = function(tax){
+            if (tax.state == 'NY')
+              return 5;
+            else
+              return 0;
+          };
+
+          // Below, we will build the required opts object.
+          var opts = {
+            buttonId: 'bread-checkout-btn',
+            items: list,
+            // Optional Array of Shipping Options
+            shippingOptions: [
+              {
+                type: 'overnight',
+                typeId: 'GS_001',
+                cost: 1350,
+              },
+              {
+                type: '2-day',
+                typeId: 'GS_002',
+                cost: 500,
+              }
+            ],
+            tax: taxCheck(shippingContact), // optional
+            actAsLabel: false,
+            asLowAs: true,
+            customCSS: true,
+            shippingContact: shippingContact,
+            billingContact: billingContact
+          };
+          // Lastly, call `checkout` with `opts` as the argument.
+          bread.checkout(opts);
+        </script>
+      </body>
+    </html>

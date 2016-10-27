@@ -1,5 +1,5 @@
 # bread
-bread api implementation in shopping cart.  Will need to have mongoose installed and run node ./product-seeder.js to initial data in database
+bread api implementation in shopping cart.  Will need to have mongoose installed and run node ./product-seeder.js to initialize data in database
 
 Currently bread API is taking in static data of $100 Amazon Echo.  To Do Make cart dynamic enough that the API gets the json data from the Cart and adds it to the bread implementation.
 
